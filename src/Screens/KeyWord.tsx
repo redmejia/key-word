@@ -1,8 +1,11 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { KeyButton } from "../Components/KeyButton/keyButton";
+import { useState } from "react";
 
 export const KeyWord = (): JSX.Element => {
 
+
+    const [key, setKey] = useState("")
 
     const rows: string[][] = [
         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
@@ -12,27 +15,30 @@ export const KeyWord = (): JSX.Element => {
         ["-", "+", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_"],
     ]
 
+    
 
 
     return (
         <View style={styles.container}>
+            <Text style={{color : '#fff'}}> {key} </Text>
             <View style={styles.row}>
-                <KeyButton row={rows[0]} />
+                <KeyButton row={rows[0]} strBuilder={key} keyPress={setKey} />
             </View>
             <View style={styles.row}>
-                <KeyButton row={rows[1]} />
+                <KeyButton row={rows[1]} strBuilder={key}  keyPress={setKey}/>
             </View>
             <View style={styles.row}>
-                <KeyButton row={rows[2]} />
+                <KeyButton row={rows[2]} strBuilder={key}  keyPress={setKey}/>
             </View>
             <View style={styles.row}>
-                <KeyButton row={rows[3]} />
+                <KeyButton row={rows[3]} strBuilder={key}  keyPress={setKey}/>
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
                     style={styles.spaceButton}
+                    onPress={()=> setKey(key +  "  ")}
                 >
-                    <Text style={{...styles.spaceText,  }}> Space </Text>
+                    <Text style={{ ...styles.spaceText, }}> Space </Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -44,7 +50,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 10,
         justifyContent: 'flex-end',
-        marginVertical : 10
+        marginVertical: 10
     },
     row: {
         flexDirection: "row",
@@ -62,9 +68,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginHorizontal: 4
     },
-    spaceText : {
+    spaceText: {
         color: '#fff',
-        textAlign : 'center',
-        fontWeight : 'bold'
+        textAlign: 'center',
+        fontWeight: 'bold'
     }
 });

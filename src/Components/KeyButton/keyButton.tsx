@@ -2,28 +2,31 @@ import { StyleSheet, Text, TouchableOpacity, useWindowDimensions } from "react-n
 
 interface KeyButtonProps {
     row?: string[];
+    strBuilder?:string;
+    keyPress?: (pressed: string) => void;
 }
 
 
 
-export const KeyButton = ({ row }: KeyButtonProps): JSX.Element => {
+export const KeyButton = ({ row, strBuilder, keyPress }: KeyButtonProps): JSX.Element => {
 
     const { width } = useWindowDimensions()
 
     return (
         <>
             {
-                row?.map((i) => {
+                row?.map((key) => {
                     return (
                         <TouchableOpacity
-                            key={i}
+                            key={key}
                             style={{ ...styles.button, width: width * 0.08 }}
+                            onPress={() => keyPress && keyPress(strBuilder + key)} // check if exist before call
                         >
-                            <Text style={styles.text}> {i} </Text>
+                            <Text style={styles.text}> {key} </Text>
                         </TouchableOpacity>
                     )
-                })}
-
+                })
+            }
         </>
 
     );
