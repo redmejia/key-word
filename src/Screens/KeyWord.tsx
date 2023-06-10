@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, TextInputFocusEven
 import { KeyButton } from "../Components/KeyButton/keyButton";
 import { useState } from "react";
 import { TextBox } from "../Components/TextBox/TextBox";
+import { ActionButton } from "../Components/ActionButton/ActionButton";
 
 export const KeyWord = (): JSX.Element => {
 
@@ -16,12 +17,16 @@ export const KeyWord = (): JSX.Element => {
         ["-", "+", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_"],
     ]
 
-    const deleteButon = (): void => {
+    const deleteButton = (): void => {
         if (key.length > 1) {
             setKey(key.slice(0, -1))
         } else {
             setKey("");
         }
+    }
+
+    const spaceButton = (): void => {
+        setKey(key + " ")
     }
 
     return (
@@ -42,23 +47,21 @@ export const KeyWord = (): JSX.Element => {
                 <KeyButton row={rows[3]} strBuilder={key} keyPress={setKey} />
             </View>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                    style={styles.deleteButton}
-                >
-                    <Text style={styles.delText}> Cap</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.spaceButton}
-                    onPress={() => setKey(key + "  ")}
-                >
-                    <Text style={{ ...styles.spaceText, }}> Space </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.deleteButton}
-                    onPress={deleteButon}
-                >
-                    <Text style={styles.delText}> Del </Text>
-                </TouchableOpacity>
+                {/* <ActionButton
+                    width={50}
+                    label="Cap"
+                    color='#FF9800'
+                /> */}
+                <ActionButton
+                    label="Space"
+                    action={spaceButton}
+                />
+                <ActionButton
+                    width={50}
+                    label="Del"
+                    color='#FF9800'
+                    action={deleteButton}
+                />
             </View>
 
         </View>
@@ -81,32 +84,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row'
     },
-    deleteButton: {
-        margin: 2,
-        height: 40,
-        width: 50,
-        backgroundColor: '#FF9800',
-        borderRadius: 10,
-        justifyContent: 'center',
-        marginHorizontal: 4
-    },
-    delText: {
-        color: '#fff',
-        textAlign: 'center',
-        fontWeight: 'bold'
-    },
-    spaceButton: {
-        margin: 2,
-        height: 40,
-        width: 150,
-        backgroundColor: '#5F79B5',
-        borderRadius: 10,
-        justifyContent: 'center',
-        marginHorizontal: 4
-    },
-    spaceText: {
-        color: '#fff',
-        textAlign: 'center',
-        fontWeight: 'bold'
-    }
 });
