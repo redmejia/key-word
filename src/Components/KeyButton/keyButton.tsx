@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, useWindowDimensions } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 
 interface KeyButtonProps {
     row?: string[];
@@ -13,7 +13,7 @@ export const KeyButton = ({ row, strBuilder, keyPress }: KeyButtonProps): JSX.El
     const { width } = useWindowDimensions()
 
     return (
-        <>
+        <View style={styles.row}>
             {
                 row?.map((key) => {
                     return (
@@ -27,12 +27,16 @@ export const KeyButton = ({ row, strBuilder, keyPress }: KeyButtonProps): JSX.El
                     )
                 })
             }
-        </>
+        </View>
 
     );
 };
 
 const styles = StyleSheet.create({
+    row: {
+        flexDirection: "row",
+        justifyContent: "center",
+    },
     button: {
         margin: 2,
         height: 40,

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, TextInputFocusEventData, NativeSyntheticEvent } from "react-native";
+import { View, StyleSheet, } from "react-native";
 import { KeyButton } from "../Components/KeyButton/keyButton";
 import { useState } from "react";
 import { TextBox } from "../Components/TextBox/TextBox";
@@ -7,7 +7,7 @@ import { ActionButton } from "../Components/ActionButton/ActionButton";
 export const KeyWord = (): JSX.Element => {
 
 
-    const [key, setKey] = useState("")
+    const [char, setChar] = useState("")
 
     const rows: string[][] = [
         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
@@ -18,40 +18,32 @@ export const KeyWord = (): JSX.Element => {
     ]
 
     const deleteButton = (): void => {
-        if (key.length > 1) {
-            setKey(key.slice(0, -1))
+        if (char.length > 1) {
+            setChar(char.slice(0, -1))
         } else {
-            setKey("");
+            setChar("");
         }
     }
 
     const spaceButton = (): void => {
-        setKey(key + " ")
+        setChar(char + " ")
     }
 
     return (
         <View style={styles.container}>
-            <TextBox
-                text={key}
-            />
-            <View style={styles.row}>
-                <KeyButton row={rows[0]} strBuilder={key} keyPress={setKey} />
-            </View>
-            <View style={styles.row}>
-                <KeyButton row={rows[1]} strBuilder={key} keyPress={setKey} />
-            </View>
-            <View style={styles.row}>
-                <KeyButton row={rows[2]} strBuilder={key} keyPress={setKey} />
-            </View>
-            <View style={styles.row}>
-                <KeyButton row={rows[3]} strBuilder={key} keyPress={setKey} />
-            </View>
+            <TextBox text={char} />
+
+            <KeyButton row={rows[0]} strBuilder={char} keyPress={setChar} />
+            <KeyButton row={rows[1]} strBuilder={char} keyPress={setChar} />
+            <KeyButton row={rows[2]} strBuilder={char} keyPress={setChar} />
+            <KeyButton row={rows[3]} strBuilder={char} keyPress={setChar} />
+
             <View style={styles.buttonContainer}>
-                {/* <ActionButton
+                <ActionButton
                     width={50}
                     label="Cap"
                     color='#FF9800'
-                /> */}
+                />
                 <ActionButton
                     label="Space"
                     action={spaceButton}
@@ -74,10 +66,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         justifyContent: 'flex-end',
         marginVertical: 10
-    },
-    row: {
-        flexDirection: "row",
-        justifyContent: "center",
     },
     buttonContainer: {
         justifyContent: 'center',
