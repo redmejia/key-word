@@ -1,4 +1,4 @@
-import { SafeAreaView, StatusBar, StyleSheet} from "react-native";
+import { Platform, SafeAreaView, StatusBar, StyleSheet} from "react-native";
 import { KeyWord } from "./src/Screens/KeyWord";
 
 
@@ -8,7 +8,7 @@ const App = (): JSX.Element => {
     <SafeAreaView style={styles.container}>
       <StatusBar
         backgroundColor="#000"
-        barStyle="light-content"
+        barStyle={Platform.OS === 'ios' ? 'dark-content': 'light-content'}
       />
       <KeyWord />
     </SafeAreaView>
@@ -19,7 +19,8 @@ const App = (): JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000005',
+    backgroundColor : '#DAE7F9'
+    // backgroundColor : '#000'
   }
 });
 
