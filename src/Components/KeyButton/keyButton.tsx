@@ -2,13 +2,19 @@ import { StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "r
 
 interface KeyButtonProps {
     row?: string[];
-    strBuilder?:string;
-    keyPress?: (pressed: string) => void;
+    strBuilder: string;
+    toCap?: boolean;
+    keyPress: (pressed: string) => void;
 }
 
+const appendChar = (capState: boolean, strBuilder: string, keyChar: string): string => {
+    if (capState) {
+        return strBuilder + keyChar.toLocaleUpperCase()
+    }
+    return strBuilder + keyChar
+}
 
-
-export const KeyButton = ({ row, strBuilder, keyPress }: KeyButtonProps): JSX.Element => {
+export const KeyButton = ({ row, strBuilder, toCap = false, keyPress }: KeyButtonProps): JSX.Element => {
 
     const { width } = useWindowDimensions()
 
@@ -20,15 +26,15 @@ export const KeyButton = ({ row, strBuilder, keyPress }: KeyButtonProps): JSX.El
                         <TouchableOpacity
                             key={key}
                             style={{ ...styles.button, width: width * 0.08 }}
-                            onPress={() => keyPress && keyPress(strBuilder + key)} // check if exist before call
+                            // onPress={() => keyPress && keyPress(strBuilder + key)} // check if exist before call when you add ? optional on props
+                            onPress={() => keyPress(appendChar(toCap, strBuilder, key))}
                         >
-                            <Text style={styles.text}> {key} </Text>
+                            <Text style={styles.text}> {toCap === true ? key.toLocaleUpperCase() : key} </Text>
                         </TouchableOpacity>
                     )
                 })
             }
         </View>
-
     );
 };
 

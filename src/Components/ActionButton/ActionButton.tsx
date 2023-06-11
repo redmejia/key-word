@@ -7,7 +7,7 @@ interface ActionBtnProps {
     action?: () => void
 }
 
-export const ActionButton = ({ label, width = 150, color='#5F79B5', action }: ActionBtnProps): JSX.Element => {
+export const ActionButton = ({ label, width = 150, color = '#5F79B5', action }: ActionBtnProps): JSX.Element => {
     return (
         <View>
             <TouchableOpacity
