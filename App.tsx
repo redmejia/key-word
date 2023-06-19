@@ -1,5 +1,6 @@
 import { Platform, SafeAreaView, StatusBar, StyleSheet} from "react-native";
-import { KeyWord } from "./src/Screens/KeyWord";
+import { Slide } from "./src/Screens/SlideShow";
+// import { KeyWord } from "./src/Screens/KeyWord";
 
 
 const App = (): JSX.Element => {
@@ -10,7 +11,8 @@ const App = (): JSX.Element => {
         backgroundColor="#000"
         barStyle={Platform.OS === 'ios' ? 'dark-content': 'light-content'}
       />
-      <KeyWord />
+      <Slide />
+      {/* <KeyWord /> */}
     </SafeAreaView>
   );
 };
