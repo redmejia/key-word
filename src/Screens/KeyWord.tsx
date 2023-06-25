@@ -3,6 +3,7 @@ import { KeyButton } from "../Components/KeyButton/keyButton";
 import { useState } from "react";
 import { TextBox } from "../Components/TextBox/TextBox";
 import { ActionButton } from "../Components/ActionButton/ActionButton";
+import { ModeButton } from "../Components/ModeButton/ModeButton";
 
 export const KeyWord = (): JSX.Element => {
 
@@ -35,7 +36,7 @@ export const KeyWord = (): JSX.Element => {
         if (toCapState) {
             setCapState(false)
         }
-        if(toCapState=== false) {
+        if (toCapState === false) {
             setCapState(true)
         }
     }
@@ -47,13 +48,13 @@ export const KeyWord = (): JSX.Element => {
             <KeyButton row={rows[0]} strBuilder={char} keyPress={setChar} />
             <KeyButton row={rows[1]} toCap={toCapState} strBuilder={char} keyPress={setChar} />
             <KeyButton row={rows[2]} toCap={toCapState} strBuilder={char} keyPress={setChar} />
-            <KeyButton row={rows[3]} toCap={toCapState}  strBuilder={char} keyPress={setChar} />
+            <KeyButton row={rows[3]} toCap={toCapState} strBuilder={char} keyPress={setChar} />
 
             <View style={styles.buttonContainer}>
                 <ActionButton
                     width={50}
                     label="Cap"
-                    color={(toCapState)? '#009688' : '#FF9800'}
+                    color={(toCapState) ? '#009688' : '#FF9800'}
                     action={toCapChar}
                 />
                 <ActionButton

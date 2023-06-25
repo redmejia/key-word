@@ -1,7 +1,8 @@
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RenderCard, SlideProps } from "../Components/SlideShow/RenderCard";
 import { SlideIndicator } from "../Components/SlideShow/SlideIndicator";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { ThemeContext } from "../context/ThemeContext/ThemeContext";
 
 const DataService: SlideProps[] = [
     {
@@ -31,6 +32,8 @@ export const Slide = (): JSX.Element => {
 
     const [currentIndex, setCurrentIndex] = useState<number>(0);
 
+    const { theme } = useContext(ThemeContext)
+
     const next = (index: number) => {
 
         if (index <= 1) {
@@ -56,60 +59,73 @@ export const Slide = (): JSX.Element => {
 
 
     return (
-        <View >
-            <FlatList
+        <View>
 
-                ref={flatListRef}
-                data={DataService}
-                renderItem={({ item }) => {
-                    return (
-                        <View>
 
-                            <RenderCard
-                                id={item.id}
-                                img={item.img}
-                                title={item.title}
-                                desc={item.desc}
-                            />
 
-                        </View>
-                    );
-                }}
-                keyExtractor={(item) => item.id.toString()}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                scrollEventThrottle={100} // slow or fast
-
-            />
             <View
-                style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+                style={{ marginTop: 20 }}
             >
+                <FlatList
 
-                <View style={styles.btns}>
-                    <TouchableOpacity
-                        style={styles.navBtn}
-                        onPress={() => back(currentIndex)}
-                    >
-                        <Text style={styles.navBtnText} > Back</Text>
-                    </TouchableOpacity>
+                    ref={flatListRef}
+                    data={DataService}
+                    renderItem={({ item }) => {
+                        return (
+                            <View>
 
-                </View>
-                <View style={styles.btns}>
-                    <TouchableOpacity
-                        style={styles.navBtn}
-                        onPress={() => next(currentIndex)}
-                    >
-                        <Text style={styles.navBtnText}>Next</Text>
-                    </TouchableOpacity>
+                                <RenderCard
+                                    id={item.id}
+                                    img={item.img}
+                                    title={item.title}
+                                    desc={item.desc}
+                                />
 
-                </View>
-            </View>
-            <View style={{ flex: 1 }}>
+                            </View>
+                        );
+                    }}
+                    keyExtractor={(item) => item.id.toString()}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    scrollEventThrottle={100} // slow or fast
 
-                <SlideIndicator
-                    length={DataService.length}
-                    indexAt={currentIndex}
                 />
+                <View
+                    style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}
+                >
+
+                    <View style={styles.btns}>
+                        <TouchableOpacity
+                              style={{
+                                ...styles.navBtn,
+                                backgroundColor: theme.btnBackground
+                            }}
+                            onPress={() => back(currentIndex)}
+                        >
+                            <Text style={styles.navBtnText} > Back</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                    <View>
+                        <SlideIndicator
+                            length={DataService.length}
+                            active={{backgroundColor: theme.btnBackground, width: 25 }}
+                            indexAt={currentIndex}
+                        />
+                    </View>
+                    <View style={styles.btns}>
+                        <TouchableOpacity
+                            style={{
+                                ...styles.navBtn,
+                                backgroundColor: theme.btnBackground
+                            }}
+                            onPress={() => next(currentIndex)}
+                        >
+                            <Text style={styles.navBtnText}>Next</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
             </View>
         </View>
     );
@@ -122,7 +138,7 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     navBtn: {
-        backgroundColor: 'rgba(0,182,100, 0.50)',
+        // backgroundColor: 'rgba(0,182,100, 0.50)',
         borderRadius: 10,
         height: 40,
         width: 65,

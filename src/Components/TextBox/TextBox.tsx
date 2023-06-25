@@ -7,7 +7,10 @@ interface TextBoxProps {
 export const TextBox = ({ text }: TextBoxProps): JSX.Element => {
     return (
         <View style={styles.entryBox}>
-            <Text style={styles.textEntry}> {text} </Text>
+            <Text 
+                numberOfLines={2}
+                adjustsFontSizeToFit
+                style={styles.textEntry}> {text} </Text>
         </View>
     );
 };
