@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { ModeButton } from "./src/Components/ModeButton/ModeButton";
 import { Divider } from "./src/Components/Divider/Divider";
 import { ThemeContext,  ThemeProvider } from "./src/context/ThemeContext/ThemeContext";
+import { ServiceDown } from "./src/Screens/ServiceDown";
 
 const Main = (): JSX.Element => {
 
@@ -75,7 +76,8 @@ const Main = (): JSX.Element => {
 			{
 				changeScreen
 					? <KeyWord />
-					: <Slide />
+					// : <Slide />
+					:<ServiceDown />
 			}
 		</SafeAreaView>
 	);
@@ -86,7 +88,7 @@ const App = (): JSX.Element => {
 
 	return (
 		<ThemeProvider>
-			<Main />
+			<ServiceDown />
 		</ThemeProvider>
 	)
 
